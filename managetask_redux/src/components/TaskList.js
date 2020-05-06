@@ -33,8 +33,6 @@ class TaskList extends Component {
                 key={task.id}
                 task={task}
                 index={index}
-                onUpdateStatus={this.props.onUpdateStatus}
-                onDelete={this.props.onDelete}
                 onUpdate={this.props.onUpdate}
             />
         }) : null;
