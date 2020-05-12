@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class Sort extends Component {
 
     onClick = (sortBy, sortValue) => {
-        console.log(sortBy, sortValue);
     };
 
     render() {

@@ -12,21 +12,21 @@ class TaskForm extends Component {
         }
     }
     componentWillMount() {
-        if (this.props.task) {
+        if (this.props.itemEditing) {
             this.setState({
-                name: this.props.task.name,
-                status: this.props.task.status,
-                id: this.props.task.id,
+                name: this.props.itemEditing.name,
+                status: this.props.itemEditing.status,
+                id: this.props.itemEditing.id,
             })
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps && nextProps.task) {
+        if (nextProps && nextProps.itemEditing) {
             this.setState({
-                name: nextProps.task.name,
-                status: nextProps.task.status,
-                id: nextProps.task.id,
+                name: nextProps.itemEditing.name,
+                status: nextProps.itemEditing.status,
+                id: nextProps.itemEditing.id,
             })
         } else {
             this.setState({
@@ -64,6 +64,7 @@ class TaskForm extends Component {
 
     onClear = () => {
         this.setState({
+            id : '',
             name: '',
             status: true
         });
@@ -71,6 +72,9 @@ class TaskForm extends Component {
 
     render() {
         var { id } = this.state;
+        if (!this.props.isDisplayForm) {
+            return '';
+        }
         return (
             <div className="panel panel-warning">
                 <div className="panel-heading">
@@ -104,6 +108,8 @@ class TaskForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        isDisplayForm: state.isDisplayForm,
+        itemEditing : state.itemEditing,
     }
 }
 

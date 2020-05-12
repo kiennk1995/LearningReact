@@ -23,7 +23,8 @@ class App extends Component {
         //     isDisplayForm: true,
         //     taskEditing: null,
         // })
-        this.props.onToggleForm();
+        this.props.onOpenForm();
+        this.props.onClearTask();
     }
 
     // onShowForm = () => {
@@ -50,7 +51,7 @@ class App extends Component {
     //     });
     //     localStorage.setItem('tasks', JSON.stringify(tasks));
     // }
-    
+
     onUpdate = (id) => {
         var { tasks } = this.state;
         var index = tasks.findIndex((obj => obj.id === id));
@@ -74,7 +75,6 @@ class App extends Component {
     }
 
     render() {
-        var { taskEditing } = this.state;
         // var {  isDisplayForm, taskEditing, filter } = this.state;
         // if (filter) {
         //     if (filter.name) {
@@ -89,12 +89,7 @@ class App extends Component {
         //     }
         // }
         var { isDisplayForm } = this.props;
-        var taskForm = isDisplayForm ?
-            <TaskForm
-                onSubmit={this.onSubmit}
-                onCloseForm={this.onCloseForm}
-                task={taskEditing}
-            /> : '';
+
         return (
             <div className="container">
                 <div className="text-center">
@@ -103,7 +98,7 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className={isDisplayForm ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : ''}>
-                        {taskForm}
+                        <TaskForm />
                     </div>
                     <div className={isDisplayForm ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
                         <button type="button" className="btn btn-primary" onClick={this.onToggleForm}>
@@ -135,8 +130,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onToggleForm: () => {
-            dispatch(actions.toggleForm());
+        onOpenForm: () => {
+            dispatch(actions.openForm());
+        },
+        onClearTask: () => {
+            dispatch(actions.clearForm());
         }
     }
 }

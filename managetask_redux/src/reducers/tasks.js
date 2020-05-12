@@ -21,8 +21,10 @@ var myReducer = (state = initialState, action) => {
             if (data.id) {
                 var index = state.findIndex((obj => obj.id === data.id));
                 if (index >= 0) {
-                    state[index].name = data.name;
-                    state[index].status = data.status;
+                    state[index] = {
+                        ...state[index], name: data.name, status : data.status
+                    };
+                    localStorage.setItem('tasks', JSON.stringify(state));
                 }
             }
             else if (data.name) {
