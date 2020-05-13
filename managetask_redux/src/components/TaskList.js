@@ -28,19 +28,46 @@ class TaskList extends Component {
 
     render() {
         var { filterName, filterStatus } = this.state;
-        var { tasks, filterTable } = this.props;
+        var { tasks, filterTable, search, sort } = this.props;
         if (filterTable) {
             if (filterTable.name) {
                 tasks = tasks.filter((task) => {
                     return task.name.toLowerCase().indexOf(filterTable.name.toLowerCase()) !== -1;
                 });
             }
+
             if (filterTable.status >= 0) {
                 tasks = tasks.filter((task) => {
                     return task.status === (filterTable.status === 1 ? true : false);
                 });
             }
         }
+
+        if (search) {
+            tasks = tasks.filter((task) => {
+                return task.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+            });
+        }
+        if (sort.sortBy === 'name') {
+            tasks.sort((a, b) => {
+                if (a.name > b.name) return sort.sortValue;
+                else if (a.name < b.name) {
+                    return -sort.sortValue;
+                } else {
+                    return 0;
+                }
+            })
+        } else {
+            tasks.sort((a, b) => {
+                if (a.status > b.status) return sort.sortValue;
+                else if (a.status < b.status) {
+                    return -sort.sortValue;
+                } else {
+                    return 0;
+                }
+            })
+        }
+
         var elementTasks = tasks ? tasks.map((task, index) => {
             return <TaskItem
                 key={task.id}
@@ -85,6 +112,8 @@ const mapStateToProps = (state) => {
     return {
         tasks: state.tasks,
         filterTable: state.filterTable,
+        search: state.search,
+        sort: state.sortby,
     }
 }
 

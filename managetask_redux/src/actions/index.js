@@ -64,3 +64,17 @@ export const filterTask = (filter) => {
         filter
     }
 };
+
+export const searchTask = (keyword) => {
+    return {
+        type: types.SEARCH,
+        keyword
+    }
+};
+
+export const sortTask = (sortby) => {
+    return {
+        type: types.SORTBY,
+        sortby
+    }
+};
