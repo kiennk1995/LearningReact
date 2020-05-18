@@ -14,19 +14,21 @@ class ProductItem extends Component {
     }
     for (let j = 0; j < (5 - rating); j++) {
       rateHtml.push(
-        <li >
+        <li key={j + 5}>
           <i className="fa fa-star-o"></i>
         </li>)
     }
     return (
-      <React.Fragment>
-        rateHtml
-      </React.Fragment>
+      rateHtml
     )
+  }
+  onAddToCard = (product) => {
+    this.props.onAddToCard(product);
   }
 
   render() {
     var { product } = this.props;
+
     return (
       <React.Fragment>
         <div className="col-lg-4 col-md-6 mb-r">
@@ -54,7 +56,13 @@ class ProductItem extends Component {
               <div className="card-footer">
                 <span className="left">{product.price}$</span>
                 <span className="right">
-                  <a href="# " className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart">
+                  <a href="# "
+                    onClick={() => this.onAddToCard(product)}
+                    className="btn-floating blue-gradient"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-ti tle="Add to Cart">
                     <i className="fa fa-shopping-cart"></i>
                   </a>
                 </span>
@@ -65,7 +73,7 @@ class ProductItem extends Component {
       </React.Fragment>
     );
   }
-
 }
+
 
 export default ProductItem;
