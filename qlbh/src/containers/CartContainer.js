@@ -5,6 +5,7 @@ import CartItem from './../components/CartItem';
 import Cart from './../components/Cart';
 // import * as Message from './../constants/Messages';
 import CartResult from './../components/CartResult';
+import * as actions from './../actions/Action';
 
 class CartContainer extends Component {
     render() {
@@ -22,7 +23,7 @@ class CartContainer extends Component {
 
         if (carts.length > 0) {
             return carts.map((cart, index) => {
-                return (<CartItem key={index} cart={cart} />)
+                return (<CartItem key={index} cart={cart} onAddToCard={this.props.onAddToCard} onRemoveFromCard={this.props.onRemoveFromCard}/>)
             });
         }
         return null;
@@ -62,4 +63,15 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, null)(CartContainer)
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onAddToCard: (product,quantity) => {
+            dispatch(actions.actAddToCard(product, quantity));
+        },
+        onRemoveFromCard: (id) => {
+            dispatch(actions.actRemoveFromCard(id));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartContainer)

@@ -10,7 +10,7 @@ const cart = (state = initialState, action) => {
                 state[index] = {
                     ...state[index], quantity: state[index].quantity + action.quantity
                 };
-                
+
             } else {
                 state.push({
                     product: action.product,
@@ -19,6 +19,13 @@ const cart = (state = initialState, action) => {
             }
             localStorage.setItem('CART', JSON.stringify(state));
             return [...state];
+        case types.REMOVE_FROM_CART:
+            index = state.findIndex((obj => obj.product.id === action.id));
+            if (index > -1) {
+                state.splice(index, 1);
+            } 
+            localStorage.setItem('CART', JSON.stringify(state));
+            return [...state];;
         default:
             return [...state];
     }

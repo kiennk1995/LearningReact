@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 
 class CartItem extends Component {
+  onAddToCard = (product, quantity) => {
+    this.props.onAddToCard(product, quantity);
+  }
+
+  onRemoveFromCard = (id) => {
+    this.props.onRemoveFromCard(id);
+  }
+
   render() {
     var { cart } = this.props;
     return (
@@ -18,22 +26,20 @@ class CartItem extends Component {
         <td className="center-on-small-only">
           <span className="qty">{cart.quantity} </span>
           <div className="btn-group radio-group" data-toggle="buttons">
-            <label className="btn btn-sm btn-primary
+            <label onClick={() => this.onAddToCard(cart.product, -1)} className="btn btn-sm btn-primary
                               btn-rounded waves-effect waves-light">
-              <a href="# ">—</a>
+              <a href="# " >—</a>
             </label>
-            <label className="btn btn-sm btn-primary
+            <label onClick={() => this.onAddToCard(cart.product, 1)} className="btn btn-sm btn-primary
                               btn-rounded waves-effect waves-light">
-              <a href="# ">+</a>
+              <a href="# "  >+</a>
             </label>
           </div>
         </td>
-        <td>{cart.product.price  * cart.quantity}$</td>
+        <td>{cart.product.price * cart.quantity}$</td>
         <td>
-          <button type="button" className="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top"
-            title="" data-original-title="Remove item">
-            X
-                      </button>
+          <button type="button" onClick={() => this.onRemoveFromCard(cart.product.id)} className="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top"
+            title="" data-original-title="Remove item">X</button>
         </td>
       </tr>
     );

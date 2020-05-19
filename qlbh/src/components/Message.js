@@ -5,7 +5,7 @@ class Message extends Component {
     return (
       <div>
         <h3>
-          <span className="badge amber darken-2">Mua Hàng Thành Công !</span>
+          <span className="badge amber darken-2">{this.props.message}</span>
         </h3>
       </div>
     );

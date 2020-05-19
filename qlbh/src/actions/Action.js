@@ -7,3 +7,10 @@ export const actAddToCard = (product,quantity) => {
         quantity
     }
 }
+
+export const actRemoveFromCard = (id) => {
+    return {
+        type : types.REMOVE_FROM_CART,
+        id,
+    }
+}
