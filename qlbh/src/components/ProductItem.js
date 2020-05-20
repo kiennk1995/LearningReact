@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as Message from './../constants/Messages';
 
 class ProductItem extends Component {
   showRating = (rating) => {
@@ -24,6 +25,7 @@ class ProductItem extends Component {
   }
   onAddToCard = (product) => {
     this.props.onAddToCard(product);
+    this.props.onChangeMessage(Message.MSG_ADD_TO_CART_SUCCESS);
   }
 
   render() {

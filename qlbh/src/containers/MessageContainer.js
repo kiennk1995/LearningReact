@@ -20,12 +20,9 @@ MessageContainer.propTypes = {
 
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state.message)
-
     return {
         message: state.message
     }
 }
-
 
 export default connect(mapStateToProps, null)(MessageContainer)

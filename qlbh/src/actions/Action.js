@@ -14,3 +14,10 @@ export const actRemoveFromCard = (id) => {
         id,
     }
 }
+
+export const actChangeMessage = (message) => {
+    return {
+        type : types.CHANGE_MESSAGE,
+        message,
+    }
+}

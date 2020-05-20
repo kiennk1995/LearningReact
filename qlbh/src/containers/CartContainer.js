@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CartItem from './../components/CartItem';
 import Cart from './../components/Cart';
-// import * as Message from './../constants/Messages';
+import * as Message from './../constants/Messages';
 import CartResult from './../components/CartResult';
 import * as actions from './../actions/Action';
 
@@ -19,14 +19,18 @@ class CartContainer extends Component {
     }
 
     showProducts = (carts) => {
-        // var result = Message.MES_CART_EMPTY;
-
         if (carts.length > 0) {
             return carts.map((cart, index) => {
-                return (<CartItem key={index} cart={cart} onAddToCard={this.props.onAddToCard} onRemoveFromCard={this.props.onRemoveFromCard}/>)
+                return (<CartItem 
+                    key={index} 
+                    cart={cart} 
+                    onAddToCard={this.props.onAddToCard} 
+                    onRemoveFromCard={this.props.onRemoveFromCard}
+                    onChangeMessage= {this.props.onChangeMessage}
+                    />)
             });
         }
-        return null;
+        return <tr><td>{Message.MES_CART_EMPTY}</td></tr>;
     };
 
     subTotalAmount = (carts) => {
@@ -70,6 +74,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onRemoveFromCard: (id) => {
             dispatch(actions.actRemoveFromCard(id));
+        },
+        onChangeMessage: (message) => {
+            dispatch(actions.actChangeMessage(message));
         }
     }
 }

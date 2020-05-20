@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import * as message from './../constants/Messages';
 
 class CartItem extends Component {
   onAddToCard = (product, quantity) => {
     this.props.onAddToCard(product, quantity);
+    this.props.onChangeMessage(message.MES_UPDATE_CART_SUCCESS);
   }
 
   onRemoveFromCard = (id) => {
     this.props.onRemoveFromCard(id);
+    this.props.onChangeMessage(message.MES_DELETE_PRODUCT_IN_CART_SUCCESS);
   }
 
   render() {
