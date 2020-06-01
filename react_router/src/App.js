@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
+import NotFound from './components/NotFound';
 
 const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
   return (
     <Route path={to} exact={activeOnlyWhenExact} children={({ match }) => {
-      console.log('match', match);
       var active = match ? 'active bbb' : '';
       return (
         <li className={active}>
@@ -28,8 +28,11 @@ class App extends Component {
             <MenuLink label="Giới Thiệu" to="/about" activeOnlyWhenExact={false} />
           </ul>
         </nav>
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/about" component={About}></Route>
+        <Switch>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/about" component={About}></Route>
+          <Route component={NotFound}></Route>
+        </Switch>
       </Router>
     );
   }
